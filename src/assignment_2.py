@@ -273,8 +273,9 @@ display(df_age_na.summary())
 # MAGIC filtered dataset only contains race numbers 50-879 as opposed to 1-1030, and 
 # MAGIC drivers 30-86 as opposed to 1-848.
 # MAGIC 
-# MAGIC 2. Sorting the table up and down in databricks does not do anything for driver
-# MAGIC related variables. Only Michael Schumacher is reflected.
+# MAGIC 2. Sorting the table with only missing age values up and down in databricks
+# MAGIC does not do anything for driver related variables. Only Michael Schumacher 
+# MAGIC is reflected.
 # MAGIC 
 # MAGIC I think the restriction in the range of raceIds might be related to the
 # MAGIC drivers. As drivers 30-86 probably don't have careers that span the whole 
@@ -317,7 +318,22 @@ display(df_age_na_replicated.summary())
 # MAGIC  
 # MAGIC  We can thus conclude that the missingness pattern of age in df_missing
 # MAGIC  is that age is missing for the drivers with driverIds contained within
-# MAGIC  `list_age_na_drivers`
+# MAGIC  `list_age_na_drivers`.
+# MAGIC  
+# MAGIC  **Note:** With hindsight having done questions 2 and 3, it is also
+# MAGIC  clear that the drivers with missing age data were all over 50 years
+# MAGIC  old. Given that the df_missing dataset simply didn't have this data,
+# MAGIC  it was impossible to know this without looking at the original data
+# MAGIC  first. This leaves 2 possibilities:
+# MAGIC  1. All ages above 50 were removed, creating a situation where all
+# MAGIC  the ages of drivers in `list_age_na_drivers` were removed, without
+# MAGIC  affecting any other driverrs (since they were below 50 years old).
+# MAGIC  2. The ages of drivers in `list_age_na_drivers` were intentionally
+# MAGIC  removed, and they were all above 50 years old.
+# MAGIC  
+# MAGIC  1 is the more likely scenario, but without looking at the original
+# MAGIC  data until tackling question 2, I was led to believe that 2 was
+# MAGIC  what was happening.
 
 # COMMAND ----------
 
